@@ -1,11 +1,18 @@
 import { useMemo } from 'react'
-import { createRoot } from 'react-dom/client'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import FastNoiseLite from 'fastnoise-lite'
-import { lerp, MathUtils } from 'three/src/math/MathUtils.js'
+import { lerp } from 'three/src/math/MathUtils.js'
 
-export function GridCanvas() {
+type NoiseType = typeof FastNoiseLite.NoiseType[keyof typeof FastNoiseLite.NoiseType]
+
+type GridCanvasProps = {
+    frequency: number,
+    intensity: number,
+    type: NoiseType
+}
+
+export function GridCanvas({ frequency, intensity, type }: GridCanvasProps) {
     const radius = .1
     const quality = 4
     const rows = 60
@@ -16,9 +23,9 @@ export function GridCanvas() {
     const totalWidth = (cols - 1) * spacing
     const totalHeight = (cols - 1) * spacing
 
-    const noiseFrequency = .05
-    const noiseIntensity = 1.0
-    const noiseType = FastNoiseLite.NoiseType.OpenSimplex2
+    const noiseFrequency = frequency
+    const noiseIntensity = intensity
+    const noiseType = type
     const noise = useMemo(() => {
         const finalNoise = new FastNoiseLite()
         finalNoise.SetNoiseType(noiseType)
@@ -94,5 +101,3 @@ export function GridCanvas() {
         </div>
     )
 }
-
-createRoot(document.getElementById('root')).render(<GridCanvas />)

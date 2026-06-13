@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import FastNoiseLite from 'fastnoise-lite'
 import { lerp, MathUtils } from 'three/src/math/MathUtils.js'
 
@@ -52,7 +52,7 @@ export function GridCanvas() {
                 const currentDistance = Math.sqrt(distanceSquared)
                 let edgeScaleFactor = 1
 
-                // checks if the current dot position is pase the shrinking threshold.
+                // checks if the current dot position is past the shrinking threshold.
                 if (currentDistance > shrinkStart) {
                     const rimTotalWidth = maskRadius - shrinkStart
                     const distanceIntoRim = currentDistance - shrinkStart
@@ -86,7 +86,8 @@ export function GridCanvas() {
             height: '100vh'
         }}>
             <Canvas>
-                <OrbitControls />
+                <PerspectiveCamera makeDefault position={[0, -15, 8]}/>
+                <OrbitControls target={[0, 0, -1.5]}/>
                 <ambientLight intensity={0.3} />
                 {gridElements}
             </Canvas>

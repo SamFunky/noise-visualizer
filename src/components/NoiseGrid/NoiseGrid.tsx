@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import FastNoiseLite from 'fastnoise-lite'
+import { lerp } from 'three/src/math/MathUtils.js'
 
 export function GridCanvas() {
     const radius = .05
@@ -15,6 +16,7 @@ export function GridCanvas() {
     const totalHeight = (cols - 1) * spacing
 
     const noiseFrequency = .05
+    const noiseIntensity = 3.0
     const noiseType = FastNoiseLite.NoiseType.OpenSimplex2
     const noise = useMemo(() => {
         const finalNoise = new FastNoiseLite()
@@ -27,12 +29,25 @@ export function GridCanvas() {
         for (let x = 0; x < cols; x++) {
             const posX = (x * spacing) - (totalWidth/2)
             const posY = (y * spacing) - (totalHeight/2)
-            const posZ = noise.GetNoise(x, y)
+            const pointNoiseValue = (noise.GetNoise(x, y) + 1) / 2 // normalize the value
+            const posZ = pointNoiseValue * noiseIntensity
+            // coral red/orange
+            const r1 = 237
+            const g1 = 64
+            const b1 = 90
+            // light blue
+            const r2 = 108
+            const g2 = 207
+            const b2 = 246
+            // interpolated channels
+            const r = Math.round(lerp(r1, r2, pointNoiseValue))
+            const g = Math.round(lerp(g1, g2, pointNoiseValue))
+            const b = Math.round(lerp(b1, b2, pointNoiseValue))
 
             gridElements.push(
                 <mesh key={'${x}-${y}'} position={[posX, posY, posZ]}>
-                    <sphereGeometry args={[radius, quality, quality]} />
-                    <meshStandardMaterial emissive={'#B8F1FF'} emissiveIntensity={1}/>
+                    <sphereGeometry args={[lerp(radius/4, radius, pointNoiseValue), Math.round(quality * pointNoiseValue), Math.round(quality * pointNoiseValue)]} />
+                    <meshStandardMaterial emissive={`rgb(${r}, ${g}, ${b})`} emissiveIntensity={1}/>
                 </mesh>
             )
         }

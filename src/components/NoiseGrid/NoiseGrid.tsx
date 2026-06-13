@@ -45,16 +45,28 @@ export function GridCanvas() {
             const g = Math.round(lerp(g1, g2, pointNoiseValue))
             const b = Math.round(lerp(b1, b2, pointNoiseValue))
 
+            const shrinkStart = maskRadius * 0.7
             const distanceSquared = Math.pow(posX, 2) + Math.pow(posY, 2)
-            const currentDistance = Math.sqrt(distanceSquared)
-            const distanceRatio = currentDistance / maskRadius
-            const edgeScaleFactor = Math.max(0, Math.min(1, 1-distanceRatio))
-            const dotNoiseSize = lerp(radius/2, radius, pointNoiseValue)
-            const dotSize = lerp(0, dotNoiseSize, edgeScaleFactor)
-            const dotQuality = Math.round(quality * pointNoiseValue)
 
-            if (Math.pow(posX, 2) + Math.pow(posY, 2) < Math.pow(maskRadius, 2)) {
-                console.log("made it through")
+            if (distanceSquared < Math.pow(maskRadius, 2)) {
+                const currentDistance = Math.sqrt(distanceSquared)
+                let edgeScaleFactor = 1
+
+                // checks if the current dot position is pase the shrinking threshold.
+                if (currentDistance > shrinkStart) {
+                    const rimTotalWidth = maskRadius - shrinkStart
+                    const distanceIntoRim = currentDistance - shrinkStart
+                    const rimProgress = distanceIntoRim / rimTotalWidth
+                    
+                    edgeScaleFactor = 1 - rimProgress
+                }
+
+                edgeScaleFactor = Math.max(0, Math.min(1, edgeScaleFactor)) // just in case
+
+                const baseNoiseSize = lerp(radius / 4, radius, pointNoiseValue)
+                const dotSize = lerp(0, baseNoiseSize, edgeScaleFactor)
+                const dotQuality = Math.max(3, Math.round(quality * pointNoiseValue))
+
                 gridElements.push(
                     <mesh key={`${x}-${y}`} position={[posX, posY, posZ]}>
                         <sphereGeometry args={[dotSize, dotQuality, dotQuality]} />

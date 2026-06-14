@@ -1,0 +1,9 @@
+.noise-controls {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 250px;
+    z-index: 1;
+    padding: 16px;
+    border-radius: 8px;
+  }

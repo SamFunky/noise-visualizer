@@ -10,11 +10,12 @@ type FractalType = typeof FastNoiseLite.FractalType[keyof typeof FastNoiseLite.F
 type GridCanvasProps = {
     frequency: number,
     intensity: number,
+    seed: number,
     type: NoiseType
     fractal: FractalType
 }
 
-export function GridCanvas({ frequency, intensity, type, fractal }: GridCanvasProps) {
+export function GridCanvas({ frequency, intensity, seed, type, fractal }: GridCanvasProps) {
     const radius = .1
     const quality = 4
     const rows = 60
@@ -25,24 +26,21 @@ export function GridCanvas({ frequency, intensity, type, fractal }: GridCanvasPr
     const totalWidth = (cols - 1) * spacing
     const totalHeight = (cols - 1) * spacing
 
-    const fractalType = fractal
-    const noiseFrequency = frequency
-    const noiseIntensity = intensity
-    const noiseType = type
     const noise = useMemo(() => {
         const finalNoise = new FastNoiseLite()
-        finalNoise.SetNoiseType(noiseType)
-        finalNoise.SetFrequency(noiseFrequency)
-        finalNoise.SetFractalType(fractalType)
+        finalNoise.SetNoiseType(type)
+        finalNoise.SetFrequency(frequency)
+        finalNoise.SetFractalType(fractal)
+        finalNoise.SetSeed(seed)
         return finalNoise
-    }, [noiseFrequency, noiseType, fractalType])
+    }, [frequency, type, fractal, seed])
 
     for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
             const posX = (x * spacing) - (totalWidth/2)
             const posY = (y * spacing) - (totalHeight/2)
             const pointNoiseValue = (noise.GetNoise(x, y) + 1) / 2 // normalize the value
-            const posZ = pointNoiseValue * noiseIntensity
+            const posZ = pointNoiseValue * intensity
             // coral red/orange
             const r1 = 237
             const g1 = 64

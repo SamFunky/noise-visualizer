@@ -10,6 +10,7 @@ type FractalType = typeof FastNoiseLite.FractalType[keyof typeof FastNoiseLite.F
 function App() {
   const [frequency, setFrequency] = useState(0.05)
   const [intensity, setIntensity] = useState(1.0)
+  const [seed, setSeed] = useState(1337)
   const [noiseType, setNoiseType] = useState<NoiseType>(FastNoiseLite.NoiseType.OpenSimplex2)
   const [fractalType, setFractalType] = useState<FractalType>(FastNoiseLite.FractalType.None)
 
@@ -20,6 +21,8 @@ function App() {
         setFrequency={setFrequency}
         intensity={intensity}
         setIntensity={setIntensity}
+        seed={seed}
+        setSeed={setSeed}
         noiseType={noiseType}
         setNoiseType={setNoiseType}
         fractalType={fractalType}
@@ -27,8 +30,9 @@ function App() {
       />
       <GridCanvas 
         frequency={frequency} 
-        type={noiseType} 
         intensity={intensity}
+        seed={seed}
+        type={noiseType} 
         fractal={fractalType}
       />
       

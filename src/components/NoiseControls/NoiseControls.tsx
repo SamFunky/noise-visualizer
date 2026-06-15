@@ -14,6 +14,8 @@ type NoiseControlProps = {
     setFrequency: (value: number) => void
     intensity: number
     setIntensity: (value: number) => void
+    seed: number
+    setSeed: (value: number) => void
     noiseType: NoiseType
     setNoiseType: (value: NoiseType) => void
     fractalType: FractalType
@@ -25,6 +27,8 @@ export function NoiseControlPannel({
     setFrequency,
     intensity,
     setIntensity,
+    seed,
+    setSeed,
     noiseType,
     setNoiseType,
     fractalType,
@@ -53,6 +57,16 @@ export function NoiseControlPannel({
                 step={0.01}
                 valueLabelDisplay='auto'
                 onChange={(_, value) => setIntensity(value as number)}
+            />
+            <Slider 
+                aria-label='seed'
+                value={seed}
+                size="small"
+                min={1}
+                max={9999}
+                step={1}
+                valueLabelDisplay='auto'
+                onChange={(_, value) => setSeed(value as number)}
             />
             <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <Select

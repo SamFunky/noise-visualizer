@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FastNoiseLite from 'fastnoise-lite'
 
 type NoiseType = typeof FastNoiseLite.NoiseType[keyof typeof FastNoiseLite.NoiseType]
+type FractalType = typeof FastNoiseLite.FractalType[keyof typeof FastNoiseLite.FractalType]
 
 type NoiseControlProps = {
     frequency: number
@@ -15,6 +16,8 @@ type NoiseControlProps = {
     setIntensity: (value: number) => void
     noiseType: NoiseType
     setNoiseType: (value: NoiseType) => void
+    fractalType: FractalType
+    setFractalType: (value: FractalType) => void
 }
 
 export function NoiseControlPannel({
@@ -23,7 +26,9 @@ export function NoiseControlPannel({
     intensity,
     setIntensity,
     noiseType,
-    setNoiseType
+    setNoiseType,
+    fractalType,
+    setFractalType
 
 }: NoiseControlProps) {
 
@@ -80,6 +85,40 @@ export function NoiseControlPannel({
                     <MenuItem value={FastNoiseLite.NoiseType.Perlin}>Perlin</MenuItem>
                     <MenuItem value={FastNoiseLite.NoiseType.ValueCubic}>ValueCubic</MenuItem>
                     <MenuItem value={FastNoiseLite.NoiseType.Value}>Value</MenuItem>
+                </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <Select
+                    value={fractalType}
+                    displayEmpty
+                    onChange={(event: SelectChangeEvent<FractalType>) => setFractalType(event.target.value as FractalType)}
+                    inputProps={{ 'aria-label': 'Fractal Type' }}
+                    sx={{
+                        color: "white",
+
+                        "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "white"
+                        },
+
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "white",
+                        },
+
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "white",
+                        },
+
+                        "& .MuiSvgIcon-root": {
+                            color: "white",
+                        },
+                    }}
+                >
+                    <MenuItem value={FastNoiseLite.FractalType.None}><em>None</em></MenuItem>
+                    <MenuItem value={FastNoiseLite.FractalType.FBm}>FBm</MenuItem>
+                    <MenuItem value={FastNoiseLite.FractalType.Ridged}>Ridged</MenuItem>
+                    <MenuItem value={FastNoiseLite.FractalType.PingPong}>PingPong</MenuItem>
+                    <MenuItem value={FastNoiseLite.FractalType.DomainWarpProgressive}>DomainWaprProgressive</MenuItem>
+                    <MenuItem value={FastNoiseLite.FractalType.DomainWarpIndependent}>DomainWarpIndependent</MenuItem>
                 </Select>
             </FormControl>
         </div>

@@ -5,14 +5,16 @@ import FastNoiseLite from 'fastnoise-lite'
 import { lerp } from 'three/src/math/MathUtils.js'
 
 type NoiseType = typeof FastNoiseLite.NoiseType[keyof typeof FastNoiseLite.NoiseType]
+type FractalType = typeof FastNoiseLite.FractalType[keyof typeof FastNoiseLite.FractalType]
 
 type GridCanvasProps = {
     frequency: number,
     intensity: number,
     type: NoiseType
+    fractal: FractalType
 }
 
-export function GridCanvas({ frequency, intensity, type }: GridCanvasProps) {
+export function GridCanvas({ frequency, intensity, type, fractal }: GridCanvasProps) {
     const radius = .1
     const quality = 4
     const rows = 60
@@ -23,6 +25,7 @@ export function GridCanvas({ frequency, intensity, type }: GridCanvasProps) {
     const totalWidth = (cols - 1) * spacing
     const totalHeight = (cols - 1) * spacing
 
+    const fractalType = fractal
     const noiseFrequency = frequency
     const noiseIntensity = intensity
     const noiseType = type
@@ -30,8 +33,9 @@ export function GridCanvas({ frequency, intensity, type }: GridCanvasProps) {
         const finalNoise = new FastNoiseLite()
         finalNoise.SetNoiseType(noiseType)
         finalNoise.SetFrequency(noiseFrequency)
+        finalNoise.SetFractalType(fractalType)
         return finalNoise
-    }, [noiseFrequency, noiseType])
+    }, [noiseFrequency, noiseType, fractalType])
 
     for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {

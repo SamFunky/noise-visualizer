@@ -5,11 +5,13 @@ import FastNoiseLite from 'fastnoise-lite'
 import { useState } from 'react'
 
 type NoiseType = typeof FastNoiseLite.NoiseType[keyof typeof FastNoiseLite.NoiseType]
+type FractalType = typeof FastNoiseLite.FractalType[keyof typeof FastNoiseLite.FractalType]
 
 function App() {
   const [frequency, setFrequency] = useState(0.05)
   const [intensity, setIntensity] = useState(1.0)
   const [noiseType, setNoiseType] = useState<NoiseType>(FastNoiseLite.NoiseType.OpenSimplex2)
+  const [fractalType, setFractalType] = useState<FractalType>(FastNoiseLite.FractalType.None)
 
   return (
     <div>
@@ -20,11 +22,14 @@ function App() {
         setIntensity={setIntensity}
         noiseType={noiseType}
         setNoiseType={setNoiseType}
+        fractalType={fractalType}
+        setFractalType={setFractalType}
       />
       <GridCanvas 
         frequency={frequency} 
         type={noiseType} 
         intensity={intensity}
+        fractal={fractalType}
       />
       
     </div>

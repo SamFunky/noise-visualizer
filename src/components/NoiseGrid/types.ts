@@ -16,3 +16,8 @@ export type NoiseConfig = {
     domainWarpType: DomainWarpType
     domainWarpAmp: number
 }
+
+export type NoiseGrid2DProps = NoiseConfig & {
+    intensity: number,
+    noise: FastNoiseLiteInstace
+}

@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { NoiseGrid2D } from './NoiseGrid2D'
+import { NoiseGrid3D } from './NoiseGrid3D'
 import type { NoiseVisualizerProps } from './types'
 import { useFastNoise } from './useFastNoise'
 
@@ -18,7 +19,8 @@ export function NoiseVisualizer({intensity, ...noiseConfig}: NoiseVisualizerProp
                 <PerspectiveCamera makeDefault position={[0, -15, 8]}/>
                 <OrbitControls target={[0, 0, -1.5]}/>
                 <ambientLight intensity={0.3} />
-                <NoiseGrid2D {...noiseConfig} intensity={intensity} noise={noise} />
+                <NoiseGrid3D {...noiseConfig} noise={noise} />
+                {/* <NoiseGrid2D {...noiseConfig} intensity={intensity} noise={noise} /> */}
             </Canvas>
         </div>
     )

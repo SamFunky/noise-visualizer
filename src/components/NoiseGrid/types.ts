@@ -25,3 +25,7 @@ export type NoiseGrid2DProps = NoiseConfig & {
     intensity: number,
     noise: FastNoiseLiteInstace
 }
+
+export type NoiseGrid3DProps = NoiseConfig & {
+    noise: FastNoiseLiteInstace
+}

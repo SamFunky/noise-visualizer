@@ -1,11 +1,12 @@
 import { useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
-import FastNoiseLite from 'fastnoise-lite'
+import FastNoiseLite, { Vector2 } from 'fastnoise-lite'
 import { lerp } from 'three/src/math/MathUtils.js'
 
 type NoiseType = typeof FastNoiseLite.NoiseType[keyof typeof FastNoiseLite.NoiseType]
 type FractalType = typeof FastNoiseLite.FractalType[keyof typeof FastNoiseLite.FractalType]
+type DomainWarpType = typeof FastNoiseLite.DomainWarpType[keyof typeof FastNoiseLite.DomainWarpType]
 
 type GridCanvasProps = {
     frequency: number,
@@ -13,9 +14,25 @@ type GridCanvasProps = {
     seed: number,
     type: NoiseType
     fractal: FractalType
+    fractalOctaves: number
+    fractalLacunarity: number
+    fractalGain: number
+    domainWarpType: DomainWarpType
+    domainWarpAmp: number
 }
 
-export function GridCanvas({ frequency, intensity, seed, type, fractal }: GridCanvasProps) {
+export function GridCanvas({
+    frequency,
+    intensity,
+    seed,
+    type,
+    fractal,
+    fractalOctaves,
+    fractalLacunarity,
+    fractalGain,
+    domainWarpType,
+    domainWarpAmp,
+}: GridCanvasProps) {
     const radius = .1
     const quality = 4
     const rows = 60
@@ -32,14 +49,29 @@ export function GridCanvas({ frequency, intensity, seed, type, fractal }: GridCa
         finalNoise.SetFrequency(frequency)
         finalNoise.SetFractalType(fractal)
         finalNoise.SetSeed(seed)
+        finalNoise.SetFractalOctaves(fractalOctaves)
+        finalNoise.SetFractalLacunarity(fractalLacunarity)
+        finalNoise.SetFractalGain(fractalGain)
+        finalNoise.SetDomainWarpType(domainWarpType)
+        finalNoise.SetDomainWarpAmp(domainWarpAmp)
+        
         return finalNoise
-    }, [frequency, type, fractal, seed])
+    }, [frequency, type, fractal, seed, fractalOctaves, fractalLacunarity, fractalGain, domainWarpType, domainWarpAmp])
+
+    const sampleNoise = (x: number, y: number) => {
+        if (domainWarpAmp > 0) {
+            const coord = new Vector2( x, y )
+            noise.DomainWrap(coord)
+            return noise.GetNoise(coord.x, coord.y)
+        }
+        return noise.GetNoise(x, y)
+    }
 
     for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
             const posX = (x * spacing) - (totalWidth/2)
             const posY = (y * spacing) - (totalHeight/2)
-            const pointNoiseValue = (noise.GetNoise(x, y) + 1) / 2 // normalize the value
+            const pointNoiseValue = (sampleNoise(x, y) + 1) / 2 // normalize the value
             const posZ = pointNoiseValue * intensity
             // coral red/orange
             const r1 = 237

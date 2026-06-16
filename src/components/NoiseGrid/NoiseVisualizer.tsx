@@ -1,6 +1,5 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
-import { NoiseGrid2D } from './NoiseGrid2D'
 import { NoiseGrid3D } from './NoiseGrid3D'
 import type { NoiseVisualizerProps } from './types'
 import { useFastNoise } from './useFastNoise'

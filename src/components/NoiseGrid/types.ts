@@ -8,12 +8,12 @@ export type DomainWarpType = typeof FastNoiseLite.DomainWarpType[keyof typeof Fa
 export type NoiseConfig = {
     frequency: number,
     seed: number,
-    type: NoiseType
-    fractal: FractalType
-    fractalOctaves: number
-    fractalLacunarity: number
-    fractalGain: number
-    domainWarpType: DomainWarpType
+    type: NoiseType,
+    fractal: FractalType,
+    fractalOctaves: number,
+    fractalLacunarity: number,
+    fractalGain: number,
+    domainWarpType: DomainWarpType,
     domainWarpAmp: number
 }
 
@@ -28,4 +28,13 @@ export type NoiseGrid2DProps = NoiseConfig & {
 
 export type NoiseGrid3DProps = NoiseConfig & {
     noise: FastNoiseLiteInstace
+}
+
+export type pointNeighborCheckProps = {
+    noise: FastNoiseLiteInstace,
+    domainWarpAmp: number,
+    threshold: number,
+    x: number,
+    y: number,
+    z: number
 }

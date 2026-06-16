@@ -1,16 +1,17 @@
 import { sampleNoise } from "./sampleNoise"
 import type { NoiseGrid3DProps } from "./types"
 import { lerp } from "three/src/math/MathUtils.js"
+import { pointNeighborCheck } from "./pointNeighborCheck"
 
 export function NoiseGrid3D(config: NoiseGrid3DProps) {
     const radius = .1
     const quality = 4
-    const rows = 25
+    const rows = 60
     const spacing = .3
     const maskRadius = (rows * spacing) / 2
     const gridElements = []
     const totalWidth = (rows - 1) * spacing
-    const pointValueCutoff = .25
+    const pointValueCutoff = .5
 
     for (let x = 0; x < rows; x++) {
         const posX = (x * spacing) - (totalWidth/2)
@@ -22,11 +23,11 @@ export function NoiseGrid3D(config: NoiseGrid3DProps) {
                 const posZ = (z * spacing) - (totalWidth/2)
                 const pointNoiseValue = (sampleNoise(config.domainWarpAmp, config.noise, x, y, z) + 1) / 2 // normalize the value
 
-                const shrinkStart = maskRadius * 0.7
+                const shrinkStart = maskRadius * 0.85
                 const distanceSquared = Math.pow(posX, 2) + Math.pow(posY, 2) + Math.pow(posZ, 2)
 
                 // checks if the current dot position is past the shrinking threshold.
-                if (distanceSquared < Math.pow(maskRadius, 2) && pointNoiseValue > pointValueCutoff) {
+                if (distanceSquared < Math.pow(maskRadius, 2) && pointNoiseValue > pointValueCutoff && pointNeighborCheck({noise: config.noise, domainWarpAmp: config.domainWarpAmp, threshold: pointValueCutoff, x: x, y: y, z: z })) {
                     const currentDistance = Math.sqrt(distanceSquared)
                     let edgeScaleFactor = 1
 
@@ -45,7 +46,7 @@ export function NoiseGrid3D(config: NoiseGrid3DProps) {
                     const dotQuality = Math.max(3, Math.round(quality * pointNoiseValue))
 
                     gridElements.push(
-                        <mesh key={`${x}-${y}`} position={[posX, posY, posZ]}>
+                        <mesh key={`${x}-${y}-${z}`} position={[posX, posY, posZ]}>
                             <sphereGeometry args={[dotSize, dotQuality, dotQuality]} />
                             <meshStandardMaterial emissive={'rgb(108, 207, 246)'} emissiveIntensity={1}/>
                         </mesh>

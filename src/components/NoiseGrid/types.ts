@@ -18,7 +18,8 @@ export type NoiseConfig = {
 }
 
 export type NoiseVisualizerProps = NoiseConfig & {
-    intensity: number
+    intensity: number,
+    isDisplaying3D: boolean
 }
 
 export type NoiseGrid2DProps = NoiseConfig & {

@@ -1,5 +1,6 @@
 import './NoiseControls.css'
 import Slider from '@mui/material/Slider';
+import Switch from '@mui/material/Switch'
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import type { SelectChangeEvent } from '@mui/material/Select';
@@ -31,6 +32,8 @@ type NoiseControlProps = {
     setDomainWarpType: (value: DomainWarpType) => void
     domainWarpAmp: number
     setDomainWarpAmp: (value: number) => void
+    isDisplaying3D: boolean
+    setIsDisplaying3D: (value: boolean) => void
 }
 
 const selectSx = {
@@ -73,7 +76,9 @@ export function NoiseControlPannel({
     domainWarpType,
     setDomainWarpType,
     domainWarpAmp,
-    setDomainWarpAmp
+    setDomainWarpAmp,
+    isDisplaying3D,
+    setIsDisplaying3D
 
 }: NoiseControlProps) {
 
@@ -203,6 +208,7 @@ export function NoiseControlPannel({
                     <MenuItem value={FastNoiseLite.DomainWarpType.BasicGrid}>BasicGrid</MenuItem>
                 </Select>
             </FormControl>
+            <Switch onChange={(_, value) => setIsDisplaying3D(value as boolean)} />
         </div>
     )
 }

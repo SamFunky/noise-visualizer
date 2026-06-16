@@ -19,6 +19,7 @@ function App() {
   const [fractalGain, setFractalGain] = useState(0.5)
   const [domainWarpType, setDomainWarpType] = useState<DomainWarpType>(FastNoiseLite.DomainWarpType.OpenSimplex2)
   const [domainWarpAmp, setDomainWarpAmp] = useState(0.0)
+  const [isDisplaying3D, setIsDisplaying3D] = useState(false)
 
   return (
     <div>
@@ -43,8 +44,11 @@ function App() {
         setDomainWarpType={setDomainWarpType}
         domainWarpAmp={domainWarpAmp}
         setDomainWarpAmp={setDomainWarpAmp}
+        isDisplaying3D={isDisplaying3D}
+        setIsDisplaying3D={setIsDisplaying3D}
       />
       <NoiseVisualizer
+        isDisplaying3D={isDisplaying3D}
         frequency={frequency} 
         intensity={intensity}
         seed={seed}

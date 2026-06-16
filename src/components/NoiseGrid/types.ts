@@ -1,5 +1,6 @@
 import FastNoiseLite from 'fastnoise-lite'
 
+export type FastNoiseLiteInstace = InstanceType<typeof FastNoiseLite>
 export type NoiseType = typeof FastNoiseLite.NoiseType[keyof typeof FastNoiseLite.NoiseType]
 export type FractalType = typeof FastNoiseLite.FractalType[keyof typeof FastNoiseLite.FractalType]
 export type DomainWarpType = typeof FastNoiseLite.DomainWarpType[keyof typeof FastNoiseLite.DomainWarpType]

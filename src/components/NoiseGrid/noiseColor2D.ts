@@ -5,7 +5,7 @@ import type { FastNoiseLiteInstace } from './types'
 const LOW = { r: 237, g: 64, b: 90 } // coral red/orange
 const HIGH = { r: 108, g: 207, b: 246 } // light blue
 
-export function noiseColor(
+export function noiseColor2D(
     domainWarpAmp: number, 
     noise: FastNoiseLiteInstace, 
     x: number, 

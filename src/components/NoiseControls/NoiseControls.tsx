@@ -208,7 +208,7 @@ export function NoiseControlPannel({
                     <MenuItem value={FastNoiseLite.DomainWarpType.BasicGrid}>BasicGrid</MenuItem>
                 </Select>
             </FormControl>
-            <Switch onChange={(_, value) => setIsDisplaying3D(value as boolean)} />
+            <Switch value={isDisplaying3D} onChange={(_, value) => setIsDisplaying3D(value as boolean)} />
         </div>
     )
 }

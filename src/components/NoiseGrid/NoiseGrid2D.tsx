@@ -1,5 +1,5 @@
 import { sampleNoise } from "./sampleNoise"
-import { noiseColor } from "./noiseColor"
+import { noiseColor2D } from "./noiseColor2D"
 import type { NoiseGrid2DProps } from './types'
 import { lerp } from "three/src/math/MathUtils.js"
 
@@ -45,7 +45,7 @@ export function NoiseGrid2D(config: NoiseGrid2DProps) {
                 gridElements.push(
                     <mesh key={`${x}-${y}`} position={[posX, posY, posZ]}>
                         <sphereGeometry args={[dotSize, dotQuality, dotQuality]} />
-                        <meshStandardMaterial emissive={noiseColor(config.domainWarpAmp, config.noise, x, y)} emissiveIntensity={1}/>
+                        <meshStandardMaterial emissive={noiseColor2D(config.domainWarpAmp, config.noise, x, y)} emissiveIntensity={1}/>
                     </mesh>
                 )
             }

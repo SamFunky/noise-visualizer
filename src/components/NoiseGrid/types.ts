@@ -17,6 +17,10 @@ export type NoiseConfig = {
     domainWarpAmp: number
 }
 
+export type NoiseVisualizerProps = NoiseConfig & {
+    intensity: number
+}
+
 export type NoiseGrid2DProps = NoiseConfig & {
     intensity: number,
     noise: FastNoiseLiteInstace

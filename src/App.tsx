@@ -1,8 +1,8 @@
 import './App.css'
-import { GridCanvas } from './components/NoiseGrid/NoiseGrid'
 import { NoiseControlPannel } from './components/NoiseControls/NoiseControls'
 import FastNoiseLite from 'fastnoise-lite'
 import { useState } from 'react'
+import { NoiseVisualizer } from './components/NoiseGrid/NoiseVisualizer'
 
 type NoiseType = typeof FastNoiseLite.NoiseType[keyof typeof FastNoiseLite.NoiseType]
 type FractalType = typeof FastNoiseLite.FractalType[keyof typeof FastNoiseLite.FractalType]
@@ -44,7 +44,7 @@ function App() {
         domainWarpAmp={domainWarpAmp}
         setDomainWarpAmp={setDomainWarpAmp}
       />
-      <GridCanvas 
+      <NoiseVisualizer
         frequency={frequency} 
         intensity={intensity}
         seed={seed}

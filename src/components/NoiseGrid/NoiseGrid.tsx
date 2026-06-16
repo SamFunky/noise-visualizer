@@ -36,12 +36,11 @@ export function GridCanvas({
     const radius = .1
     const quality = 4
     const rows = 60
-    const cols = 60
     const spacing = .3
     const maskRadius = (rows * spacing) / 2
     const gridElements = []
-    const totalWidth = (cols - 1) * spacing
-    const totalHeight = (cols - 1) * spacing
+    const totalWidth = (rows - 1) * spacing
+    const totalHeight = (rows - 1) * spacing
 
     const noise = useMemo(() => {
         const finalNoise = new FastNoiseLite()
@@ -68,7 +67,7 @@ export function GridCanvas({
     }
 
     for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
+        for (let x = 0; x < rows; x++) {
             const posX = (x * spacing) - (totalWidth/2)
             const posY = (y * spacing) - (totalHeight/2)
             const pointNoiseValue = (sampleNoise(x, y) + 1) / 2 // normalize the value

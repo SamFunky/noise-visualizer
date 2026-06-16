@@ -2,6 +2,7 @@ import { sampleNoise } from "./sampleNoise"
 import type { NoiseGrid3DProps } from "./types"
 import { lerp } from "three/src/math/MathUtils.js"
 import { pointNeighborCheck } from "./pointNeighborCheck"
+import { noiseColor3D } from "./noiseColor3D"
 
 export function NoiseGrid3D(config: NoiseGrid3DProps) {
     const radius = .1
@@ -48,7 +49,7 @@ export function NoiseGrid3D(config: NoiseGrid3DProps) {
                     gridElements.push(
                         <mesh key={`${x}-${y}-${z}`} position={[posX, posY, posZ]}>
                             <sphereGeometry args={[dotSize, dotQuality, dotQuality]} />
-                            <meshStandardMaterial emissive={'rgb(108, 207, 246)'} emissiveIntensity={1}/>
+                            <meshStandardMaterial emissive={noiseColor3D(distanceSquared, Math.pow(maskRadius, 2), x, y, z)} emissiveIntensity={1}/>
                         </mesh>
                     )
                 }

@@ -119,9 +119,9 @@ export function NoiseControlPannel({
     setIsDisplaying3D,
 }: NoiseControlProps) {
     return (
-        <div className="noise-controls">
+        <div className="noise-controls custom-scrollbar">
             <p className="noise-controls-section">General</p>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
                 <p className="noise-controls-label">noise type</p>
                 <Select
                     value={noiseType}
@@ -162,7 +162,7 @@ export function NoiseControlPannel({
             />
 
             <p className="noise-controls-section">Fractal</p>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
                 <p className="noise-controls-label">fractal type</p>
                 <Select
                     value={fractalType ?? NONE_OPTION_TEXT}
@@ -237,7 +237,7 @@ export function NoiseControlPannel({
             />
 
             <p className="noise-controls-section">Cellular</p>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
                 <p className="noise-controls-label">distance function</p>
                 <Select
                     value={cellularDistanceFunction}
@@ -252,7 +252,7 @@ export function NoiseControlPannel({
                     <MenuItem value={FastNoiseLite.CellularDistanceFunction.Hybrid}>Hybrid</MenuItem>
                 </Select>
             </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
                 <p className="noise-controls-label">return type</p>
                 <Select
                     value={cellularReturnType}
@@ -283,7 +283,7 @@ export function NoiseControlPannel({
             />
 
             <p className="noise-controls-section">Domain Warp</p>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
                 <p className="noise-controls-label">domain warp type</p>
                 <Select
                     value={domainWarpType ?? NONE_OPTION_TEXT}
@@ -336,7 +336,7 @@ export function NoiseControlPannel({
             />
 
             <p className="noise-controls-section">Domain Warp Fractal</p>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
                 <p className="noise-controls-label">domain warp fractal type</p>
                 <Select
                     value={domainWarpFractalType ?? NONE_OPTION_TEXT}

@@ -1,13 +1,12 @@
 .noise-controls {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 250px;
+    width: 300px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     z-index: 1;
-    padding: 16px;
-    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    background-color: #16161F;
+    border-right: 3px solid #16161F;
 }
 
 .noise-controls-label {
@@ -28,3 +27,29 @@
     padding-top: 0;
     border-top: none;
 }
+  
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #16161F;
+    width: 10px;
+}
+  
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4a5568;
+    border-radius: 1px;
+}
+  
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #2d3748;
+}
+  
+.custom-scrollbar::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+}
+  

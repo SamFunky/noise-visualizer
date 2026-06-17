@@ -17,7 +17,7 @@ export function NoiseGrid2D(config: NoiseGrid2DProps) {
         for (let x = 0; x < rows; x++) {
             const posX = (x * spacing) - (totalWidth/2)
             const posY = (y * spacing) - (totalHeight/2)
-            const pointNoiseValue = (sampleNoise(config.domainWarpAmp, config.noise, x, y) + 1) / 2 // normalize the value
+            const pointNoiseValue = (sampleNoise(config, config.noise, config.warpNoise, x, y) + 1) / 2
             const posZ = pointNoiseValue * config.intensity
 
             const shrinkStart = maskRadius * 0.7
@@ -45,7 +45,7 @@ export function NoiseGrid2D(config: NoiseGrid2DProps) {
                 gridElements.push(
                     <mesh key={`${x}-${y}`} position={[posX, posY, posZ]}>
                         <sphereGeometry args={[dotSize, dotQuality, dotQuality]} />
-                        <meshStandardMaterial emissive={noiseColor2D(config.domainWarpAmp, config.noise, x, y)} emissiveIntensity={1}/>
+                        <meshStandardMaterial emissive={noiseColor2D(config, config.noise, config.warpNoise, x, y)} emissiveIntensity={1}/>
                     </mesh>
                 )
             }

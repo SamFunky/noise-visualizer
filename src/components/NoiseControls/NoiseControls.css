@@ -3,7 +3,28 @@
     top: 20px;
     left: 20px;
     width: 250px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
     z-index: 1;
     padding: 16px;
     border-radius: 8px;
-  }
+}
+
+.noise-controls-label {
+    color: white;
+    margin: -2px;
+}
+
+.noise-controls-section {
+    color: white;
+    font-weight: 600;
+    margin: 12px 0 4px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.noise-controls-section:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}

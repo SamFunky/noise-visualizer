@@ -22,13 +22,13 @@ export function NoiseGrid3D(config: NoiseGrid3DProps) {
 
             for (let z = 0; z < rows; z++) {
                 const posZ = (z * spacing) - (totalWidth/2)
-                const pointNoiseValue = (sampleNoise(config.domainWarpAmp, config.noise, x, y, z) + 1) / 2 // normalize the value
+                const pointNoiseValue = (sampleNoise(config, config.noise, config.warpNoise, x, y, z) + 1) / 2
 
                 const shrinkStart = maskRadius * 0.85
                 const distanceSquared = Math.pow(posX, 2) + Math.pow(posY, 2) + Math.pow(posZ, 2)
 
                 // checks if the current dot position is past the shrinking threshold.
-                if (distanceSquared < Math.pow(maskRadius, 2) && pointNoiseValue > pointValueCutoff && pointNeighborCheck({noise: config.noise, domainWarpAmp: config.domainWarpAmp, threshold: pointValueCutoff, x: x, y: y, z: z })) {
+                if (distanceSquared < Math.pow(maskRadius, 2) && pointNoiseValue > pointValueCutoff && pointNeighborCheck({ ...config, threshold: pointValueCutoff, x, y, z })) {
                     const currentDistance = Math.sqrt(distanceSquared)
                     let edgeScaleFactor = 1
 

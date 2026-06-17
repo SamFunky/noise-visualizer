@@ -13,10 +13,11 @@ export function pointNeighborCheck(config: pointNeighborCheckProps): boolean {
     
     for (const offset of neighborOffset) {
         if (((sampleNoise(
-            config.domainWarpAmp, 
-            config.noise, 
-            config.x + offset.x, 
-            config.y + offset.y, 
+            config,
+            config.noise,
+            config.warpNoise,
+            config.x + offset.x,
+            config.y + offset.y,
             config.z + offset.z
         ) + 1) / 2) < config.threshold) return true
     }

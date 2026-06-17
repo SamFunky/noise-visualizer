@@ -49,7 +49,7 @@ export function NoiseGrid3D(config: NoiseGrid3DProps) {
                     gridElements.push(
                         <mesh key={`${x}-${y}-${z}`} position={[posX, posY, posZ]}>
                             <sphereGeometry args={[dotSize, dotQuality, dotQuality]} />
-                            <meshStandardMaterial emissive={noiseColor3D(distanceSquared, Math.pow(maskRadius, 2), x, y, z)} emissiveIntensity={1}/>
+                            <meshStandardMaterial emissive={noiseColor3D(distanceSquared, Math.pow(maskRadius, 2))} emissiveIntensity={1}/>
                         </mesh>
                     )
                 }

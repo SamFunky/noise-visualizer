@@ -6,9 +6,6 @@ const HIGH = { r: 108, g: 207, b: 246 } // light blue
 export function noiseColor3D(
     pointDistance: number,
     maxDistance: number,
-    x: number, 
-    y: number,
-    z: number
 ): string {
     const distanceToCenterFactor = pointDistance/maxDistance
     // interpolated channels

@@ -18,6 +18,7 @@
     "fastnoise-lite": "^1.1.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "shadcn": "^4.11.0",
     "three": "^0.184.0"
   },
   "devDependencies": {

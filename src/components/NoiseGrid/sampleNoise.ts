@@ -2,7 +2,7 @@ import { Vector3, Vector2 } from 'fastnoise-lite'
 import type { DomainWarpConfig, FastNoiseLiteInstace } from './types'
 
 export function isDomainWarpActive(config: Pick<DomainWarpConfig, 'domainWarpType' | 'domainWarpAmp'>): boolean {
-    return config.domainWarpType != null && config.domainWarpAmp > 0
+    return config.domainWarpType != null && config.domainWarpAmp[0] > 0
 }
 
 export function sampleNoise(

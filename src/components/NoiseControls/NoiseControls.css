@@ -1,26 +1,36 @@
 .noise-controls {
     position: fixed;
     width: 300px;
-    max-height: calc(100vh - 40px);
+    max-height: 100vh;
     overflow-y: auto;
     z-index: 1;
     padding: 1rem 1.5rem;
+    padding-bottom: 3rem;
     background-color: #16161F;
     border-right: 3px solid #16161F;
 }
 
 .noise-controls-label {
-    color: white;
-    margin: -2px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 16px;
+}
+
+.noise-controls-label.is-disabled {
+    color: rgba(255, 255, 255, 0.25);
 }
 
 .noise-controls-section {
-    color: white;
+    color: rgb(239, 251, 255);
+    font-size: .75rem;
     font-weight: 600;
-    margin: 12px 0 4px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 24px 0 8px;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+  }
 
 .noise-controls-section:first-child {
     margin-top: 0;
@@ -52,4 +62,4 @@
     width: 0px !important;
     height: 0px !important;
 }
-  
+    

@@ -14,38 +14,38 @@ export type DomainWarpFractalType =
     | typeof FastNoiseLite.FractalType.DomainWarpIndependent
 
 export type NoiseConfig = {
-    frequency: number
-    seed: number
+    frequency: number[]
+    seed: number[]
     type: NoiseType
     fractal: NoiseFractalType | null
-    fractalOctaves: number
-    fractalLacunarity: number
-    fractalGain: number
-    fractalWeightedStrength: number
-    fractalPingPongStrength: number
+    fractalOctaves: number[]
+    fractalLacunarity: number[]
+    fractalGain: number[]
+    fractalWeightedStrength: number[]
+    fractalPingPongStrength: number[]
     cellularDistanceFunction: CellularDistanceFunction
     cellularReturnType: CellularReturnType
-    cellularJitter: number
+    cellularJitter: number[]
 }
 
 export type DomainWarpConfig = {
     domainWarpType: DomainWarpType | null
-    domainWarpAmp: number
-    domainWarpSeed: number
-    domainWarpFrequency: number
+    domainWarpAmp: number[]
+    domainWarpSeed: number[]
+    domainWarpFrequency: number[]
     domainWarpFractalType: DomainWarpFractalType | null
-    domainWarpFractalOctaves: number
-    domainWarpFractalLacunarity: number
-    domainWarpFractalGain: number
+    domainWarpFractalOctaves: number[]
+    domainWarpFractalLacunarity: number[]
+    domainWarpFractalGain: number[]
 }
 
 export type NoiseVisualizerProps = NoiseConfig & DomainWarpConfig & {
-    intensity: number
+    intensity: number[]
     isDisplaying3D: boolean
 }
 
 export type NoiseGrid2DProps = NoiseConfig & DomainWarpConfig & {
-    intensity: number
+    intensity: number[]
     noise: FastNoiseLiteInstace
     warpNoise: FastNoiseLiteInstace
 }

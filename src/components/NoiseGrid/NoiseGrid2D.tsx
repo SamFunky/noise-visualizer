@@ -18,7 +18,7 @@ export function NoiseGrid2D(config: NoiseGrid2DProps) {
             const posX = (x * spacing) - (totalWidth/2)
             const posY = (y * spacing) - (totalHeight/2)
             const pointNoiseValue = (sampleNoise(config, config.noise, config.warpNoise, x, y) + 1) / 2
-            const posZ = pointNoiseValue * config.intensity
+            const posZ = pointNoiseValue * config.intensity[0]
 
             const shrinkStart = maskRadius * 0.7
             const distanceSquared = Math.pow(posX, 2) + Math.pow(posY, 2)

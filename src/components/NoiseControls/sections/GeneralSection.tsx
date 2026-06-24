@@ -26,8 +26,8 @@ export function GeneralSection({
                 value={seed}
                 onValueChange={setSeed}
                 min={0}
-                max={999}
-                step={1}
+                max={10000}
+                step={10}
             />
             <ControlSlider
                 id="slider-frequency"

@@ -1,75 +1,55 @@
-# React + TypeScript + Vite
+# Noise Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive visualizer for [FastNoiseLite](https://github.com/Auburn/FastNoiseLite) noise. Tweak noise parameters in a sidebar and see the result rendered in real time as a 2D dot grid or a 3D point surface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **2D view** — circular dot grid with height and color driven by noise values
+- **3D view** — isosurface-style point cloud with orbit controls
+- **Full FastNoiseLite controls** — noise type, fractal, cellular, domain warp, and domain warp fractal settings
+- **Display adjustments** — intensity, black/white point remapping
+- **Editable slider values** — click any value readout to type a number directly
 
-## React Compiler
+## Quick start
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open the URL shown in the terminal (typically `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Other scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server with hot reload |
+| `npm run build` | Type-check and production build |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+
+## Controls overview
+
+| Section | What it controls |
+|---|---|
+| **Display** | 2D/3D toggle, intensity, black & white point |
+| **General** | Noise type, seed, frequency |
+| **Fractal** | Fractal type and octaves/lacunarity/gain (disabled when type is None) |
+| **Cellular** | Distance function, return type, jitter (disabled unless noise type is Cellular) |
+| **Domain Warp** | Warp type, amplitude, seed, frequency |
+| **Domain Warp Fractal** | Warp fractal type and parameters (requires active domain warp) |
+
+For parameter details, see the [FastNoiseLite documentation](https://github.com/Auburn/FastNoiseLite).
+
+## Tech stack
+
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/)
+- [Three.js](https://threejs.org/) via [@react-three/fiber](https://docs.pmnd.rs/react-three-fiber) and [@react-three/drei](https://github.com/pmndrs/drei)
+- [fastnoise-lite](https://www.npmjs.com/package/fastnoise-lite)
+- [shadcn/ui](https://ui.shadcn.com/) + [Tailwind CSS](https://tailwindcss.com/)
+
+## Project docs
+
+- [Architecture](./docs/architecture.md) — how the app is structured and how data flows
+- [Future features](./docs/future-features.md) — planned improvements and ideas

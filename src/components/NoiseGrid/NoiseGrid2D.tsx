@@ -1,4 +1,5 @@
 import { sampleNoise } from "./sampleNoise"
+import { getDisplayNoiseValue } from "./normalizeNoise"
 import { noiseColor2D } from "./noiseColor2D"
 import type { NoiseGrid2DProps } from './types'
 import { lerp } from "three/src/math/MathUtils.js"
@@ -17,7 +18,10 @@ export function NoiseGrid2D(config: NoiseGrid2DProps) {
         for (let x = 0; x < rows; x++) {
             const posX = (x * spacing) - (totalWidth/2)
             const posY = (y * spacing) - (totalHeight/2)
-            const pointNoiseValue = (sampleNoise(config, config.noise, config.warpNoise, x, y) + 1) / 2
+            const pointNoiseValue = getDisplayNoiseValue(
+                sampleNoise(config, config.noise, config.warpNoise, x, y),
+                config.blackWhitePoint
+            )
             const posZ = pointNoiseValue * config.intensity[0]
 
             const shrinkStart = maskRadius * 0.7
@@ -27,7 +31,6 @@ export function NoiseGrid2D(config: NoiseGrid2DProps) {
                 const currentDistance = Math.sqrt(distanceSquared)
                 let edgeScaleFactor = 1
 
-                // checks if the current dot position is past the shrinking threshold.
                 if (currentDistance > shrinkStart) {
                     const rimTotalWidth = maskRadius - shrinkStart
                     const distanceIntoRim = currentDistance - shrinkStart
@@ -36,7 +39,7 @@ export function NoiseGrid2D(config: NoiseGrid2DProps) {
                     edgeScaleFactor = 1 - rimProgress
                 }
 
-                edgeScaleFactor = Math.max(0, Math.min(1, edgeScaleFactor)) // just in case
+                edgeScaleFactor = Math.max(0, Math.min(1, edgeScaleFactor))
 
                 const baseNoiseSize = lerp(radius / 4, radius, pointNoiseValue)
                 const dotSize = lerp(0, baseNoiseSize, edgeScaleFactor)
@@ -45,7 +48,7 @@ export function NoiseGrid2D(config: NoiseGrid2DProps) {
                 gridElements.push(
                     <mesh key={`${x}-${y}`} position={[posX, posY, posZ]}>
                         <sphereGeometry args={[dotSize, dotQuality, dotQuality]} />
-                        <meshStandardMaterial emissive={noiseColor2D(config, config.noise, config.warpNoise, x, y)} emissiveIntensity={1}/>
+                        <meshStandardMaterial emissive={noiseColor2D(pointNoiseValue)} emissiveIntensity={1}/>
                     </mesh>
                 )
             }

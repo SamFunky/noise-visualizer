@@ -6,6 +6,8 @@ import { ControlSection } from '../ControlSection'
 import { ControlSlider } from '../ControlSlider'
 import type { DisplaySectionProps } from '../types'
 
+const MIN_LEVEL_GAP = 0.01
+
 export function DisplaySection({
     isDisplaying3D,
     setIsDisplaying3D,
@@ -32,11 +34,14 @@ export function DisplaySection({
                 max={4.0}
                 step={0.01}
             />
-            <ControlSlider 
+            <ControlSlider
                 id="black-white-point"
                 label="Black and White Point"
                 value={blackWhitePoint}
-                onValueChange={setBlackWhitePoint}
+                onValueChange={([black, white]) => {
+                    if (white - black < MIN_LEVEL_GAP) return
+                    setBlackWhitePoint([black, white])
+                }}
                 min={0.0}
                 max={1.0}
                 step={0.01}

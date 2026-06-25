@@ -45,18 +45,22 @@ export type NoiseVisualizerProps = NoiseConfig & DomainWarpConfig & {
     blackWhitePoint: number[]
 }
 
-export type NoiseGrid2DProps = NoiseConfig & DomainWarpConfig & {
+export type DisplayConfig = {
+    blackWhitePoint: number[]
+}
+
+export type NoiseGrid2DProps = NoiseConfig & DomainWarpConfig & DisplayConfig & {
     intensity: number[]
     noise: FastNoiseLiteInstace
     warpNoise: FastNoiseLiteInstace
 }
 
-export type NoiseGrid3DProps = NoiseConfig & DomainWarpConfig & {
+export type NoiseGrid3DProps = NoiseConfig & DomainWarpConfig & DisplayConfig & {
     noise: FastNoiseLiteInstace
     warpNoise: FastNoiseLiteInstace
 }
 
-export type pointNeighborCheckProps = DomainWarpConfig & {
+export type pointNeighborCheckProps = DomainWarpConfig & DisplayConfig & {
     noise: FastNoiseLiteInstace
     warpNoise: FastNoiseLiteInstace
     threshold: number

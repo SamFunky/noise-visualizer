@@ -1,4 +1,5 @@
 import { sampleNoise } from "./sampleNoise"
+import { getDisplayNoiseValue } from "./normalizeNoise"
 import type { NoiseGrid3DProps } from "./types"
 import { lerp } from "three/src/math/MathUtils.js"
 import { pointNeighborCheck } from "./pointNeighborCheck"
@@ -22,12 +23,14 @@ export function NoiseGrid3D(config: NoiseGrid3DProps) {
 
             for (let z = 0; z < rows; z++) {
                 const posZ = (z * spacing) - (totalWidth/2)
-                const pointNoiseValue = (sampleNoise(config, config.noise, config.warpNoise, x, y, z) + 1) / 2
+                const pointNoiseValue = getDisplayNoiseValue(
+                    sampleNoise(config, config.noise, config.warpNoise, x, y, z),
+                    config.blackWhitePoint
+                )
 
                 const shrinkStart = maskRadius * 0.85
                 const distanceSquared = Math.pow(posX, 2) + Math.pow(posY, 2) + Math.pow(posZ, 2)
 
-                // checks if the current dot position is past the shrinking threshold.
                 if (distanceSquared < Math.pow(maskRadius, 2) && pointNoiseValue > pointValueCutoff && pointNeighborCheck({ ...config, threshold: pointValueCutoff, x, y, z })) {
                     const currentDistance = Math.sqrt(distanceSquared)
                     let edgeScaleFactor = 1
@@ -40,7 +43,7 @@ export function NoiseGrid3D(config: NoiseGrid3DProps) {
                         edgeScaleFactor = 1 - rimProgress
                     }
 
-                    edgeScaleFactor = Math.max(0, Math.min(1, edgeScaleFactor)) // just in case
+                    edgeScaleFactor = Math.max(0, Math.min(1, edgeScaleFactor))
 
                     const baseNoiseSize = lerp(radius / 4, radius, pointNoiseValue)
                     const dotSize = lerp(0, baseNoiseSize, edgeScaleFactor)

@@ -1,5 +1,6 @@
 import type { pointNeighborCheckProps } from "./types"
 import { sampleNoise } from "./sampleNoise"
+import { getDisplayNoiseValue } from "./normalizeNoise"
 
 export function pointNeighborCheck(config: pointNeighborCheckProps): boolean {
     const neighborOffset = [
@@ -12,14 +13,18 @@ export function pointNeighborCheck(config: pointNeighborCheckProps): boolean {
     ]
     
     for (const offset of neighborOffset) {
-        if (((sampleNoise(
-            config,
-            config.noise,
-            config.warpNoise,
-            config.x + offset.x,
-            config.y + offset.y,
-            config.z + offset.z
-        ) + 1) / 2) < config.threshold) return true
+        const neighborValue = getDisplayNoiseValue(
+            sampleNoise(
+                config,
+                config.noise,
+                config.warpNoise,
+                config.x + offset.x,
+                config.y + offset.y,
+                config.z + offset.z
+            ),
+            config.blackWhitePoint
+        )
+        if (neighborValue < config.threshold) return true
     }
 
     return false

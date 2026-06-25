@@ -32,7 +32,7 @@ export function ControlSlider({
             </div>
             <Slider
                 id={id}
-                defaultValue={value}
+                value={value}
                 onValueChange={onValueChange}
                 min={min}
                 max={max}

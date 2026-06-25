@@ -2,7 +2,7 @@ import type { NoiseSettings } from '@/hooks/useNoiseSettings'
 
 export type DisplaySectionProps = Pick<
     NoiseSettings,
-    'isDisplaying3D' | 'setIsDisplaying3D' | 'intensity' | 'setIntensity'
+    'isDisplaying3D' | 'setIsDisplaying3D' | 'intensity' | 'setIntensity' | 'blackWhitePoint' | 'setBlackWhitePoint'
 >
 
 export type GeneralSectionProps = Pick<

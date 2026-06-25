@@ -33,6 +33,7 @@ export function useNoiseSettings() {
     const [domainWarpFractalLacunarity, setDomainWarpFractalLacunarity] = useState([2.0])
     const [domainWarpFractalGain, setDomainWarpFractalGain] = useState([0.5])
     const [isDisplaying3D, setIsDisplaying3D] = useState(false)
+    const [blackWhitePoint, setBlackWhitePoint] = useState([0.0, 1.0])
 
     const visualizerProps: NoiseVisualizerProps = {
         frequency,
@@ -57,6 +58,7 @@ export function useNoiseSettings() {
         domainWarpFractalLacunarity,
         domainWarpFractalGain,
         isDisplaying3D,
+        blackWhitePoint,
     }
 
     return {
@@ -105,6 +107,8 @@ export function useNoiseSettings() {
         setDomainWarpFractalGain,
         isDisplaying3D,
         setIsDisplaying3D,
+        blackWhitePoint,
+        setBlackWhitePoint,
     }
 }
 

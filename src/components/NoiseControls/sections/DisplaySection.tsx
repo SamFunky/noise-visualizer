@@ -11,6 +11,8 @@ export function DisplaySection({
     setIsDisplaying3D,
     intensity,
     setIntensity,
+    blackWhitePoint,
+    setBlackWhitePoint,
 }: DisplaySectionProps) {
     return (
         <ControlSection title="Display">
@@ -28,6 +30,15 @@ export function DisplaySection({
                 onValueChange={setIntensity}
                 min={0.01}
                 max={4.0}
+                step={0.01}
+            />
+            <ControlSlider 
+                id="black-white-point"
+                label="Black and White Point"
+                value={blackWhitePoint}
+                onValueChange={setBlackWhitePoint}
+                min={0.0}
+                max={1.0}
                 step={0.01}
             />
         </ControlSection>

@@ -42,6 +42,7 @@ export type DomainWarpConfig = {
 export type NoiseVisualizerProps = NoiseConfig & DomainWarpConfig & {
     intensity: number[]
     isDisplaying3D: boolean
+    blackWhitePoint: number[]
 }
 
 export type NoiseGrid2DProps = NoiseConfig & DomainWarpConfig & {
